@@ -9,7 +9,7 @@ Express.js REST API handling a PostgreSQL DB
   - Routes
     - TBD
 - Sequelize - ORM to manage psql DB
-- Deployed on Fly.io (LINK GOES HERE)
+- Deployed on Fly.io [pi-backend-api.fly.dev](https://pi-backend-api.fly.dev/)
 
 ### General Flow
 - The backend will hold all congressional member data and user information for the application via DB.
