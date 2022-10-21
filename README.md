@@ -23,4 +23,5 @@ Express.js REST API handling a PostgreSQL DB
   - User login/loggout/create via POST requests
 
 ### Database Schema
-T B D
+
+![db_schema](./PI_DB_Schema.png)
