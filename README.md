@@ -25,3 +25,13 @@ Express.js REST API handling a PostgreSQL DB
 ### Database Schema
 
 ![db_schema](./PI_DB_Schema.png)
+
+- Addtional Data to be delivered upon request:
+  - socials
+    - twitter
+    - facebook
+    - youtube
+  - bills_sponsored
+  - bills_cosponsored
+
+This info will be added to the response json back to Client. Client will be saving the complete member object locally in the component/redux (TBD)
