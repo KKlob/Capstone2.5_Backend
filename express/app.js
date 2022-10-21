@@ -4,7 +4,7 @@ const ExpressError = require('./expressError');
 const congressRoutes = require('./Routes/congressRoutes');
 const userRoutes = require('./Routes/userRoutes');
 const app = express();
-const { models } = require('../sequelize');
+
 
 app.use(express.json());
 app.use(cors());

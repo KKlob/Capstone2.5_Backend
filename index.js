@@ -10,29 +10,43 @@ async function checkDBConnecitonOK() {
         console.log("DB conneciton OK!");
     } catch (error) {
         console.log("Unable to connect to the db");
-        console.log(error.message);
+        console.error(error.message);
         process.exit(1);
     }
 }
 
 async function fillStatesTable() {
     console.log("Checking States Table...");
-    const states = await sequelize.models.States.findAll();
-    if (states.length === 0) {
-        await DB_Utils.fillStates();
-    } else {
-        console.log("States Table filled");
+    try {
+        const states = await sequelize.models.States.findAll();
+        if (states.length === 0) {
+            await DB_Utils.fillStates();
+        } else {
+            console.log("States Table filled");
+        }
+    } catch (error) {
+        console.log("Error occurred while checking States table");
+        console.error(error.message);
+        process.exit(1);
     }
+
 }
 
 async function fillCongressTable() {
     console.log("Checking Congress Table...");
-    const members = await sequelize.models.Congress.findAll();
-    if (members.length === 0) {
-        await DB_Utils.fillCongress();
-    } else {
-        console.log("Congress Table filled");
+    try {
+        const members = await sequelize.models.Congress.findAll();
+        if (members.length === 0) {
+            await DB_Utils.fillCongress();
+        } else {
+            console.log("Congress Table filled");
+        }
+    } catch (error) {
+        console.log("Error occurred while checking Congress table");
+        console.error(error.message);
+        process.exit(1);
     }
+
 }
 
 async function init() {
@@ -44,6 +58,8 @@ async function init() {
     console.log("*******");
 
     await fillStatesTable();
+
+    await fillCongressTable();
 
     app.listen(port, () => console.log(`Express Server w/ Sequelize DB conneciton started on port ${port}`));
 }

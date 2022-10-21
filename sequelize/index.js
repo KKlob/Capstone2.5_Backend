@@ -8,7 +8,9 @@ const sequelize = new Sequelize(db_url);
 // import all the models necessary for the db
 const modelDefiners = [
     require('./Models/userModel'),
-    require('./Models/statesModel')
+    require('./Models/statesModel'),
+    require('./Models/congressModel'),
+    require('./Models/subsModel')
 ]
 
 // define all models according to their files

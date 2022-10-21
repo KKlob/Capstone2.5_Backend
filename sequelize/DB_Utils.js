@@ -1,5 +1,6 @@
 const { models } = require('../sequelize');
 const states = require('./states.json');
+const API_Utils = require('./API_Utils');
 
 const States = models.States;
 const Congress = models.Congress;
@@ -14,6 +15,10 @@ class DB_Utilities {
 
     async fillCongress() {
         console.log("Filling congress");
+        const members = await API_Utils.getCongressMembers();
+        for (let member of members) {
+            await Congress.create({ ...member });
+        }
     }
 }
 
