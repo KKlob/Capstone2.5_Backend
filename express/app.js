@@ -4,7 +4,7 @@ const ExpressError = require('./expressError');
 const congressRoutes = require('./Routes/congressRoutes');
 const userRoutes = require('./Routes/userRoutes');
 const app = express();
-const port = process.env.PORT || 3001;
+const { models } = require('../sequelize');
 
 app.use(express.json());
 app.use(cors());
@@ -12,7 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // API ROUTES
 
-app.get("/api", (req, res) => {
+app.get("/api", (req, res, next) => {
     res.json({ message: "Hello from the Capstone2.5_Backend API" });
 })
 
@@ -34,5 +34,4 @@ app.use(function (err, req, res, next) {
     return res.status(status).json({ error: { message, status } });
 });
 
-// Ensure App is listening on port
-app.listen(port, () => console.log(`Capstone2.5_Backend API listening on port ${port}`));
+module.exports = app;

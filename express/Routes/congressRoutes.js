@@ -1,9 +1,11 @@
 const express = require('express');
 const router = new express.Router();
 const ExpressError = require('../expressError');
+const StateUtils = require('./Utilities/stateUtils');
 
-router.get("/states", function (req, res) {
-    return res.status(200).json({ "message": "/api/states route - returns info on all US states" });
+router.get("/states", async function (req, res) {
+    const results = await StateUtils.getAllStates();
+    return res.status(200).json(results);
 });
 
 router.get("/states/:state", function (req, res) {
