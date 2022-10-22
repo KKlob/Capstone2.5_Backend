@@ -1,9 +1,10 @@
 const { models } = require('../sequelize');
 const states = require('./states.json');
 const API_Utils = require('./API_Utils');
-
 const States = models.States;
 const Congress = models.Congress;
+
+// This class orgainzes helper functions when dealing with the db. Keeps code clean and universal to routes helper functions
 
 class DB_Utilities {
     async fillStates() {
@@ -14,6 +15,7 @@ class DB_Utilities {
     }
 
     async fillCongress() {
+        // loop through member objects and insert each one into the db
         console.log("Filling congress");
         const members = await API_Utils.getCongressMembers();
         for (let member of members) {
