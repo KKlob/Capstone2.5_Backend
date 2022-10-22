@@ -1,9 +1,10 @@
 const axios = require('axios');
 const { config } = require('dotenv');
-
 config();
-
 const PRO_API_KEY = process.env.PRO_API_KEY
+
+// This class organizes helper functions when dealing with an API
+// May refactor API_Data functions into it's own class, reference in functions as needed to clean data
 
 class API_Utilities {
     async getCongressMembers() {
@@ -27,11 +28,15 @@ class API_Utilities {
 
         const senateResp = senateReq.data.results[0];
         const houseResp = houseReq.data.results[0];
+        
+        // pass each response to the data scrubbing functions
 
         const cleanSenate = this.cleanUpMembers(senateResp);
         const cleanHouse = this.cleanUpMembers(houseResp);
 
         console.log("Senate and House member Data cleaned");
+        
+        // return full array of all members from senate and house
 
         return [...cleanSenate, ...cleanHouse];
 
@@ -60,13 +65,18 @@ class API_Utilities {
     }
 
     async getSecondaryMemberInfo(url) {
-        // Requests additional Member info and returns clean addData object
+        // Requests additional Member info and returns clean addData object\
+        
+        console.log("Requesting secondary member data");
+        
         const dataReq = await axios({
             method: 'get',
             url,
             headers: { 'Content-Type': 'application/json', 'X-Api-Key': PRO_API_KEY }
         });
-
+        
+        console.log("Received secondary member data");
+        
         const dataRes = dataReq.data.results[0];
 
         const date = new Date();
@@ -78,6 +88,8 @@ class API_Utilities {
         const lastCongress = roles[(Object.keys(roles).length - 1)];
 
         const years_served = year - parseInt(lastCongress.start_date.slice(0, 4));
+        
+        console.log("Scrubbing secondary member data...");
 
         const addData = {
             "total_votes": currCongress.total_votes,
@@ -92,6 +104,8 @@ class API_Utilities {
             },
             years_served
         }
+        
+        console.log("Secondary member data cleaned");
 
         return addData;
     }
