@@ -66,6 +66,7 @@ async function fillCongressTable() {
 async function init() {
     await checkDBConnecitonOK();
 
+    // Comment out resetTables() after first local run unless changing models. No need to drop / re-fill local db if not necessary
     await resetTables();
 
     await syncDB();

@@ -5,7 +5,7 @@ const API_Utils = require('../../../sequelize/API_Utils');
 
 class CongressUtilities {
     async getAllMembers() {
-        const members = await Congress.findAll();
+        const members = await Congress.findAll({ include: States });
         return members;
     }
 
@@ -19,14 +19,16 @@ class CongressUtilities {
 
     async getMembersFromChamber(chamber) {
         const members = await Congress.findAll({
-            where: { chamber }
+            where: { chamber },
+            include: States
         });
         return members;
     }
 
     async getMember(id) {
         const member = await Congress.findOne({
-            where: { id }
+            where: { id },
+            include: States
         });
         const addData = await API_Utils.getSecondaryMemberInfo(member.getDataValue('api_url'));
 
