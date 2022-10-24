@@ -1,6 +1,7 @@
 const app = require('./express/app');
 const sequelize = require('./sequelize');
 const DB_Utils = require('./sequelize/DB_Utils');
+const congressModel = require('./sequelize/Models/congressModel');
 const port = process.env.PORT || 3001;
 
 async function checkDBConnecitonOK() {
@@ -25,8 +26,10 @@ async function syncDB() {
 
 async function resetTables() {
     console.log("Reseting tables..");
-    await sequelize.drop();
-    console.log("All tables dropped!");
+    const { Congress, States } = sequelize.models;
+    await Congress.drop();
+    await States.drop();
+    console.log("");
 }
 
 async function fillStatesTable() {
@@ -67,7 +70,7 @@ async function init() {
     await checkDBConnecitonOK();
 
     // Comment out resetTables() after first local run unless changing models. No need to drop / re-fill local db if not necessary
-    await resetTables();
+    //await resetTables();
 
     await syncDB();
 
