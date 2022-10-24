@@ -15,6 +15,20 @@ async function checkDBConnecitonOK() {
     }
 }
 
+async function syncDB() {
+    console.log("*****");
+    console.log("Syncing DB...");
+    await sequelize.sync();
+    console.log("DB sync complete");
+    console.log("*******");
+}
+
+async function resetTables() {
+    console.log("Reseting tables..");
+    await sequelize.drop();
+    console.log("All tables dropped!");
+}
+
 async function fillStatesTable() {
     console.log("Checking States Table...");
     try {
@@ -51,11 +65,10 @@ async function fillCongressTable() {
 
 async function init() {
     await checkDBConnecitonOK();
-    console.log("*****");
-    console.log("Syncing DB...");
-    await sequelize.sync();
-    console.log("DB sync complete");
-    console.log("*******");
+
+    await resetTables();
+
+    await syncDB();
 
     await fillStatesTable();
 

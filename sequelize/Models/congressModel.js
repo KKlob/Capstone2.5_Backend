@@ -14,11 +14,11 @@ module.exports = (sequelize) => {
             allowNull: false,
             type: DataTypes.STRING
         },
-        name: {
+        first_name: {
             allowNull: false,
             type: DataTypes.STRING
         },
-        state: {
+        last_name: {
             allowNull: false,
             type: DataTypes.STRING
         },

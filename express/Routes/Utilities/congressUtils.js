@@ -1,5 +1,6 @@
 const { models } = require('../../../sequelize');
 const Congress = models.Congress;
+const States = models.States;
 const API_Utils = require('../../../sequelize/API_Utils');
 
 class CongressUtilities {
@@ -10,7 +11,8 @@ class CongressUtilities {
 
     async getMembersFromState(state) {
         const members = await Congress.findAll({
-            where: { state }
+            where: { state },
+            include: States
         });
         return members;
     }

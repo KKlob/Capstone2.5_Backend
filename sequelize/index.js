@@ -1,4 +1,5 @@
 const { Sequelize } = require('sequelize');
+const { addExtraSetup, applyExtraSetup } = require('./extraDBSetup');
 
 // Get database url from .env or use local db
 const db_url = process.env.DATABASE_URL || 'postgres:///pi_local_db';
@@ -18,6 +19,8 @@ for (const modelDefiner of modelDefiners) {
     modelDefiner(sequelize);
 }
 
+// Execute any extra setup after the models are defined, such as adding associations.
+applyExtraSetup(sequelize);
 
 // export the sequelize conneciton instance to be used around our app
 module.exports = sequelize;

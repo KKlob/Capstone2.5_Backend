@@ -2,10 +2,10 @@
 Political Informant Application - Express Backend w/ PostgreSQL DB
 
 ## ToDo:
-- Finish DB Models + Relations
-- Write DB_Utility functions to assist with API requests + data sanitation
-- Finish ini DB check and seeding
 - Write Route_Utilities to assist with handling API requests
+  - User Login / Logout / Create / Delete routes
+  - Authenticated Subs route - Stretch Goal
+
 
 ## Technical Overview
 Express.js REST API handling a PostgreSQL DB
