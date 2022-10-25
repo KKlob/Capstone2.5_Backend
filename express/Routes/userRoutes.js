@@ -5,7 +5,7 @@ const { UserUtils } = require('./Utilities/userUtils');
 const { ensureLoggedIn } = require('../auth');
 
 
-router.post("/login", async function (req, res, next) {
+router.get("/login", async function (req, res, next) {
     try {
         const { username, password } = req.body;
         const token = await UserUtils.loginUser(username, password);
@@ -15,7 +15,7 @@ router.post("/login", async function (req, res, next) {
     }
 });
 
-router.post("/logout", ensureLoggedIn, async function (req, res, next) {
+router.get("/logout", ensureLoggedIn, async function (req, res, next) {
     try {
         if (req.user) {
             const result = await UserUtils.logoutUser(req.user.username);
@@ -37,7 +37,7 @@ router.post("/signup", async function (req, res, next) {
     }
 });
 
-router.post("/delete", ensureLoggedIn, async function (req, res, next) {
+router.delete("/delete", ensureLoggedIn, async function (req, res, next) {
     try {
         const { user } = req.body;
         if (user) {
@@ -62,7 +62,7 @@ router.post("/subs/add", ensureLoggedIn, async function (req, res, next) {
     }
 });
 
-router.post("/subs/remove", ensureLoggedIn, async function (req, res, next) {
+router.delete("/subs/remove", ensureLoggedIn, async function (req, res, next) {
     try {
         if (req.user) {
             const result = await UserUtils.removeSub(req.user.id, req.body.memberId);
