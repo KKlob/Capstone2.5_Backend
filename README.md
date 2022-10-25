@@ -2,9 +2,7 @@
 Political Informant Application - Express Backend w/ PostgreSQL DB
 
 ## ToDo:
-- Write Route_Utilities to assist with handling API requests
-  - User Login / Logout / Create / Delete routes
-  - Authenticated Subs route - Stretch Goal
+- Nothing! We should be all set here now!
 
 
 ## Technical Overview

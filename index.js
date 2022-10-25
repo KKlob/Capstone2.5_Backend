@@ -2,6 +2,10 @@ const app = require('./express/app');
 const sequelize = require('./sequelize');
 const DB_Utils = require('./sequelize/DB_Utils');
 const port = process.env.PORT || 3001;
+const { config } = require('dotenv');
+config();
+
+const adminPassword = process.env.ADMIN_PASSWORD;
 
 async function checkDBConnecitonOK() {
     console.log("checking db conneciton... ");
@@ -57,7 +61,22 @@ async function fillCongressTable() {
         console.error(error.message);
         process.exit(1);
     }
+}
 
+async function setupAdminUser() {
+    console.log("Setting up admin account...")
+    try {
+        await DB_Utils.createAdmin('admin', adminPassword);
+        console.log("Admin account created");
+
+        console.log("Adding single subbed member to admin...");
+        await DB_Utils.createAdminSub('admin');
+        console.log("Admin sub created");
+    } catch (error) {
+        console.log("Error occurred while setting up adimn account");
+        console.log(error.message);
+        process.exit(1);
+    }
 }
 
 async function init() {
@@ -68,6 +87,8 @@ async function init() {
     await fillStatesTable();
 
     await fillCongressTable();
+
+    await setupAdminUser();
 
     app.listen(port, () => console.log(`Express Server w/ Sequelize DB conneciton started on port ${port}`));
 }
