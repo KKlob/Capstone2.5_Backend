@@ -28,7 +28,7 @@ Express.js REST API handling a PostgreSQL DB
 
 ### Database Schema
 
-![db_schema](./PI_DB_Schema.png)
+![db_schema](./db_schema.png)
 
 - Addtional Data to be delivered upon request:
   - socials
