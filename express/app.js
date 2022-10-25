@@ -21,7 +21,7 @@ app.use("/api/congress", congressRoutes);
 
 // 404 Handler
 app.use(function (req, res, next) {
-    const notFoundError = new ExpressError("Invalid Endpoint", 400);
+    const notFoundError = new ExpressError("Invalid Request. Endpoint does not exist", 400);
     return next(notFoundError);
 })
 
