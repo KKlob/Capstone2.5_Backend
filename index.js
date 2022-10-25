@@ -1,7 +1,6 @@
 const app = require('./express/app');
 const sequelize = require('./sequelize');
 const DB_Utils = require('./sequelize/DB_Utils');
-const congressModel = require('./sequelize/Models/congressModel');
 const port = process.env.PORT || 3001;
 
 async function checkDBConnecitonOK() {
