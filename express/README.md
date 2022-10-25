@@ -6,7 +6,13 @@
   - /api/user/login - POST Route - Requires {username, password} in request.body - Returns JWT {token}
   - /api/user/logout - POST Route - Requires {token} in request.body - Returns success
   - /api/user/signup - POST Route - Requires {username, password} in request.body - Returns JWT {token}
+  - /api/user/delete - DELETE Route - Requires {token} in request.body - Returns success
+
+-----
+- /api/user/subs - User Sub Routes
   - /api/user/subs - GET Route - Requires JWT {token} in request.body - Returns member list user has sub'd to
+  - /api/user/subs/add - POST Route - Requires JWT {token} in request.body - Returns success
+  - /api/user/subs/remove - DELETE Route - Requires JWT {token} in request.body - Returns success
 
 ------
 
