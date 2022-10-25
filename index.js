@@ -19,17 +19,12 @@ async function checkDBConnecitonOK() {
 async function syncDB() {
     console.log("*****");
     console.log("Syncing DB...");
-    await sequelize.sync();
+
+    // After initial run, remove the {force: true} from sequelize.sync(); No need to re-create tables every time server is run unless working on models
+
+    await sequelize.sync({ force: true });
     console.log("DB sync complete");
     console.log("*******");
-}
-
-async function resetTables() {
-    console.log("Reseting tables..");
-    const { Congress, States } = sequelize.models;
-    await Congress.drop();
-    await States.drop();
-    console.log("");
 }
 
 async function fillStatesTable() {
@@ -68,9 +63,6 @@ async function fillCongressTable() {
 
 async function init() {
     await checkDBConnecitonOK();
-
-    // Comment out resetTables() after first local run unless changing models. No need to drop / re-fill local db if not necessary
-    //await resetTables();
 
     await syncDB();
 

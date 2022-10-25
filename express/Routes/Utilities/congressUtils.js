@@ -30,8 +30,7 @@ class CongressUtilities {
             where: { id },
             include: States
         });
-        const addData = await API_Utils.getSecondaryMemberInfo(member.getDataValue('api_url'));
-
+        const addData = await API_Utils.getSecondaryMemberInfo(member.getDataValue('api_url'), id);
         return { ...member.dataValues, ...addData };
     }
 
