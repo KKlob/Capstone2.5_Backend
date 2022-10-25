@@ -17,9 +17,11 @@ router.post("/login", async function (req, res, next) {
 
 router.post("/logout", ensureLoggedIn, async function (req, res, next) {
     try {
-        const { user } = req.body;
-        const result = await UserUtils.logoutUser(user);
-        return res.status(200).json(result);
+        if (req.user) {
+            const result = await UserUtils.logoutUser(req.user.username);
+            return res.status(200).json(result);
+        }
+        throw new ExpressError("You must be logged in first!", 400);
     } catch (error) {
         return next(error);
     }
