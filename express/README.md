@@ -3,13 +3,16 @@
 ## API Route Structure
 
 - /api/user - User Routes
-  - /api/user/login - Handles login of User
-  - /api/user/logout - Handles logout of User
-  - /api/user/signup - Handles creation of new User
-  - /api/user/:id - Returns Array of member objects User is subed to
-- /api/congress - Congress Routes
-  - /states - Returns Array of state objects
-    - /states/:state - Returns array of member objects from :state
-  - /members - Returns Array of congress member objects
-  - /members/:chamber - Returns Array of member objects serving in :chamber
-  - /member/:id - Returns member object with :id
+  - /api/user/login - POST Route - Requires {username, password} in request.body - Returns JWT {token}
+  - /api/user/logout - POST Route - Requires {token} in request.body - Returns success
+  - /api/user/signup - POST Route - Requires {username, password} in request.body - Returns JWT {token}
+  - /api/user/subs - GET Route - Requires JWT {token} in request.body - Returns member list user has sub'd to
+
+------
+
+- /api/congress - Congress Routes - ALL GET ROUTES
+  - /api/congress/states - Returns Array of state objects
+    - /api/congress/states/:state - Returns array of member objects from :state
+  - /api/congress/members - Returns Array of congress member objects
+  - /api/congress/members/:chamber - Returns Array of member objects serving in :chamber
+  - /api/congress/member/:id - Returns member object with :id
