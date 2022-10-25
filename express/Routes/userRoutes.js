@@ -5,7 +5,7 @@ const { UserUtils } = require('./Utilities/userUtils');
 const { ensureLoggedIn } = require('../auth');
 
 
-router.get("/login", async function (req, res, next) {
+router.post("/login", async function (req, res, next) {
     try {
         const { username, password } = req.body;
         const token = await UserUtils.loginUser(username, password);
@@ -15,7 +15,7 @@ router.get("/login", async function (req, res, next) {
     }
 });
 
-router.get("/logout", ensureLoggedIn, async function (req, res, next) {
+router.post("/logout", ensureLoggedIn, async function (req, res, next) {
     try {
         if (req.user) {
             const result = await UserUtils.logoutUser(req.user.username);
