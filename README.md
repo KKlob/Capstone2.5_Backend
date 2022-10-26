@@ -9,8 +9,6 @@ Express.js REST API handling a PostgreSQL DB
 
 ### Tech Stack
 - Express.js REST API
-  - Routes
-    - TBD
 - Sequelize - ORM to manage psql DB
 - Deployed on Fly.io [pi-backend-api.fly.dev](https://pi-backend-api.fly.dev/)
 
