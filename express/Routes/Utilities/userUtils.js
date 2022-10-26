@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 const Users = models.Users;
 const Congress = models.Congress;
 const Subs = models.Subs;
+const API_Utils = require('../../../sequelize/API_Utils');
 const { config } = require('dotenv');
 config();
 
@@ -16,7 +17,7 @@ class UserUtilities {
             const hashedPassword = await bcrypt.hash(password, 12);
             const newUser = await Users.create({ username, password: hashedPassword });
             let payload = { id: newUser.id, username: newUser.username };
-            let token = jwt.sign(payload, JWT_SECRET_KEY);
+            let token = jwt.sign(payload, JWT_SECRET_KEY, { expiresIn: '1d' });
             return token;
         } catch (error) {
             throw new ExpressError(error.message, error.status);
@@ -32,7 +33,7 @@ class UserUtilities {
             if (user) {
                 if (await bcrypt.compare(password, user.password) === true) {
                     let payload = { id: user.id, username: user.username };
-                    let token = jwt.sign(payload, JWT_SECRET_KEY);
+                    let token = jwt.sign(payload, JWT_SECRET_KEY, { expiresIn: '1d' });
                     return token;
                 }
             }
@@ -70,7 +71,17 @@ class UserUtilities {
         try {
             const user = await Users.findOne({ where: { id: userId }, include: Congress });
             const members = user.Congresses;
+            for (let member of members) {
+                const attachData = async () => {
+                    const addData = await API_Utils.getSecondaryMemberInfo(member.api_url, member.id);
+                    for (let key of Object.keys(addData)) {
+                        member.dataValues[key] = addData[key];
+                    }
+                }
+                await attachData();
+            }
             return members;
+
         } catch (error) {
             throw new ExpressError(error.message, error.status);
         }

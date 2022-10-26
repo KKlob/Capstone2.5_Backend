@@ -1,0 +1,26 @@
+{
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "$id": "http://example.com/example.json",
+    "type": "object",
+    "default": {},
+    "title": "Root Schema",
+    "required": [
+        "token"
+    ],
+    "properties": {
+        "token": {
+            "type": "string",
+            "default": "",
+            "title": "The token Schema",
+            "examples": [
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTY2Njc5NjIwOX0.PyL3gsg9zmPQrWS5r6Zn3r3-OOi8t2787_pqWi_Zcmk"
+            ],
+            "minLength": 4
+        }
+    },
+    "examples": [
+        {
+            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTY2Njc5NjIwOX0.PyL3gsg9zmPQrWS5r6Zn3r3-OOi8t2787_pqWi_Zcmk"
+        }
+    ]
+}

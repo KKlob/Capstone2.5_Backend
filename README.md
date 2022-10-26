@@ -2,10 +2,7 @@
 Political Informant Application - Express Backend w/ PostgreSQL DB
 
 ## ToDo:
-- Add JSON Schema Validation to all necessary routes.
-  - user login/logout/signup/remove
-  - subscription add/remove/view
-- Set JWT Expiration to 24hrs
+- Nothing at this point!
 
 ## Technical Overview
 Express.js REST API handling a PostgreSQL DB
