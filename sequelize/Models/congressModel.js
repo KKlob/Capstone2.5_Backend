@@ -38,8 +38,29 @@ module.exports = (sequelize) => {
             allowNull: false,
             type: DataTypes.STRING
         },
+        total_votes: {
+            type: DataTypes.INTEGER
+        },
         api_url: {
             allowNull: false,
+            type: DataTypes.STRING
+        },
+        missed_votes: {
+            type: DataTypes.INTEGER
+        },
+        bills_sponsored: {
+            type: DataTypes.INTEGER
+        },
+        votes_with_party_pct: {
+            type: DataTypes.FLOAT
+        },
+        socials: {
+            type: DataTypes.JSON
+        },
+        years_served: {
+            type: DataTypes.INTEGER
+        },
+        photo: {
             type: DataTypes.STRING
         }
     }, {

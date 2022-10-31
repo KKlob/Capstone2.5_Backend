@@ -2,12 +2,11 @@
 Political Informant Application - Express Backend w/ PostgreSQL DB
 
 ## ToDo:
-- Create Add_Member_Data Table to store all secondary member information
-  - All 3rd-party API requests done on server initialization.
-  - Retrieve all paginated results of Congress.Gov member
-    - Organized into array of objects
-    - Inject results into the DB - relationship between CongressMember and Add_Member_Data on Congress.id - One to One
-    - When retrieving any member/members from the API, all necessary Add_Member_Data is sent with it
+ - Update API to account for secondary data requests on members being done when State Members is requested
+   - Cuts down on total secondary requests to a more manageable number
+   - Caches information, will only perform secondary request if the member data is not there.
+ - Update DB_schema to represent additional collumns in Congress Table
+ - Update Readme to reflect changes to API
 
 ## Technical Overview
 Express.js REST API handling a PostgreSQL DB

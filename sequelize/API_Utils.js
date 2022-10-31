@@ -71,7 +71,7 @@ class API_Utilities {
     }
 
     async getSecondaryMemberInfo(url, id) {
-        // Requests additional Member info and returns clean addData object\
+        // Requests additional Member info, sanatizes it, and updates the associated Congress Member.
 
         console.log("Requesting secondary member data");
         try {
@@ -105,6 +105,7 @@ class API_Utilities {
             console.log("Scrubbing secondary member data...");
 
             const addData = {
+                id,
                 "total_votes": currCongress.total_votes,
                 "missed_votes": currCongress.missed_votes,
                 "bills_sponsored": currCongress.bills_sponsored,

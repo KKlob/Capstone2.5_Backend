@@ -14,6 +14,34 @@ class CongressUtilities {
             where: { state },
             include: States
         });
+
+        const tasks = [];
+
+        for (let member of members) {
+            if (!member.photo) {
+                tasks.push(API_Utils.getSecondaryMemberInfo(member.getDataValue('api_url'), member.getDataValue('id')));
+            }
+        }
+
+        if (tasks.length > 0) {
+            const values = await Promise.all(tasks);
+            for (let addData of values) {
+                for (let member of members) {
+                    if (member.id === addData.id) {
+                        const updateData = {};
+                        for (let key of Object.keys(addData)) {
+                            if (key !== 'id') {
+                                updateData[key] = addData[key];
+                            }
+                        }
+                        member.update(updateData);
+                        member.reload();
+                        break;
+                    }
+                }
+            }
+        }
+
         return members;
     }
 
