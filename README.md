@@ -5,6 +5,8 @@ Political Informant Application - Express Backend w/ PostgreSQL DB
  - Update API to account for secondary data requests on members being done when State Members is requested
    - Cuts down on total secondary requests to a more manageable number
    - Caches information, will only perform secondary request if the member data is not there.
+    - Need to Set /member/:id to request secondary info if not available
+    - Check other Routes for necessary updates -OR- disable until future use is established
  - Update DB_schema to represent additional collumns in Congress Table
  - Update Readme to reflect changes to API
 
