@@ -19,6 +19,6 @@
 - /api/congress - Congress Routes - ALL GET ROUTES
   - /api/congress/states - Returns Array of state objects
     - /api/congress/states/:state - Returns array of member objects from :state
-  - /api/congress/members - Returns Array of congress member objects
-  - /api/congress/members/:chamber - Returns Array of member objects serving in :chamber
+  - (CURRENTLY INACTIVE) /api/congress/members - Returns Array of congress member objects
+  - (CURRENTLY INACTIVE) /api/congress/members/:chamber - Returns Array of member objects serving in :chamber
   - /api/congress/member/:id - Returns member object with :id

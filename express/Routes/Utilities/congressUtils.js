@@ -18,7 +18,7 @@ class CongressUtilities {
         const tasks = [];
 
         for (let member of members) {
-            if (!member.photo) {
+            if (!member.socials) {
                 tasks.push(API_Utils.getSecondaryMemberInfo(member.getDataValue('api_url'), member.getDataValue('id')));
             }
         }
@@ -34,8 +34,8 @@ class CongressUtilities {
                                 updateData[key] = addData[key];
                             }
                         }
-                        member.update(updateData);
-                        member.reload();
+                        await member.update(updateData);
+                        await member.reload();
                         break;
                     }
                 }
@@ -58,8 +58,20 @@ class CongressUtilities {
             where: { id },
             include: States
         });
-        const addData = await API_Utils.getSecondaryMemberInfo(member.getDataValue('api_url'), id);
-        return { ...member.dataValues, ...addData };
+
+        // add check for member.photo ? return member : request secondary info + reload member before return member
+
+        if (!member.socials) {
+            const addData = await API_Utils.getSecondaryMemberInfo(member.getDataValue('api_url'), member.getDataValue('id'));
+            await member.update({ ...addData });
+            await member.reload();
+            return member;
+        }
+
+        return member;
+
+        // const addData = await API_Utils.getSecondaryMemberInfo(member.getDataValue('api_url'), id);
+        // return { ...member.dataValues, ...addData };
     }
 
 

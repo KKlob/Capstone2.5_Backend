@@ -2,13 +2,7 @@
 Political Informant Application - Express Backend w/ PostgreSQL DB
 
 ## ToDo:
- - Update API to account for secondary data requests on members being done when State Members is requested
-   - Cuts down on total secondary requests to a more manageable number
-   - Caches information, will only perform secondary request if the member data is not there.
-    - Need to Set /member/:id to request secondary info if not available
-    - Check other Routes for necessary updates -OR- disable until future use is established
- - Update DB_schema to represent additional collumns in Congress Table
- - Update Readme to reflect changes to API
+ - Nothing at this point. Front-end Work!
 
 ## Technical Overview
 Express.js REST API handling a PostgreSQL DB
@@ -25,8 +19,7 @@ Express.js REST API handling a PostgreSQL DB
       - Limited to 5000 Requests per day
     - [Congress.gov API](https://api.congress.gov/#/)
       - Used to get Member Photo URL
-        - Currently getting CORS error - Server Side issue - Will implement later
-  - Congressional Member data will be sanatized before being stored. Will only be served via GET requests.
+    - Congressional Member data will be sanatized before being stored. Will only be served via GET requests.
   - User login/loggout/create via POST requests
 
 ### Database Schema
@@ -40,5 +33,10 @@ Express.js REST API handling a PostgreSQL DB
     - youtube
   - bills_sponsored
   - bills_cosponsored
+  - total_votes
+  - missed_votes
+  - votes_with_party_pct
+  - years_served
+  - photo
 
 This info will be added to the response json back to Client. Client will be saving the complete member object locally in the component/redux (TBD)
