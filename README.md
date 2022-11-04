@@ -2,7 +2,7 @@
 Political Informant Application - Express Backend w/ PostgreSQL DB
 
 ## ToDo:
- - Nothing at this point. Front-end Work!
+ - Write tests
 
 ## Technical Overview
 Express.js REST API handling a PostgreSQL DB
