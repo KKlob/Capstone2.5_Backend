@@ -135,15 +135,6 @@ router.delete("/subs/remove", ensureLoggedIn, async function (req, res, next) {
 });
 
 router.get("/subs", ensureLoggedIn, async function (req, res, next) {
-    const result = jsonschema.validate(req.body, authSchema);
-
-    if (!result.valid) {
-        // pass all validation errors to error handler
-        let listOfErrors = result.errors.map(error => error.stack);
-        let error = new ExpressError(listOfErrors, 400);
-        return next(error);
-    }
-
     if (req.user) {
         const subs = await UserUtils.getSubs(req.user.id);
         return res.status(200).json({ subs });

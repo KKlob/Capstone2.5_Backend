@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const { models } = require('../../../sequelize');
 const ExpressError = require('../../expressError');
 const jwt = require('jsonwebtoken');
+const States = models.States;
 const Users = models.Users;
 const Congress = models.Congress;
 const Subs = models.Subs;
@@ -69,17 +70,8 @@ class UserUtilities {
 
     async getSubs(userId) {
         try {
-            const user = await Users.findOne({ where: { id: userId }, include: Congress });
+            const user = await Users.findOne({ where: { id: userId }, include: [{ model: Congress, include: [States] }] });
             const members = user.Congresses;
-            for (let member of members) {
-                const attachData = async () => {
-                    const addData = await API_Utils.getSecondaryMemberInfo(member.api_url, member.id);
-                    for (let key of Object.keys(addData)) {
-                        member.dataValues[key] = addData[key];
-                    }
-                }
-                await attachData();
-            }
             return members;
 
         } catch (error) {
