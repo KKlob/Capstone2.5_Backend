@@ -3,6 +3,11 @@ Political Informant Application - Express Backend w/ PostgreSQL DB
 
 ## ToDo:
  - Write tests
+ - Add findSub route
+   - checks for Sub where userID && memberId
+   - if True, returns True
+   - if False, returns False
+   - Assists Front-end in determining if user is able to add sub or remove sub
 
 ## Technical Overview
 Express.js REST API handling a PostgreSQL DB
