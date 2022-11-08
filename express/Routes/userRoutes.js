@@ -7,7 +7,6 @@ const jsonschema = require('jsonschema');
 const noAuthSchema = require('./Schemas/noAuthSchema.json');
 const authSchema = require('./Schemas/authSchema.json');
 const authMemberSchema = require('./Schemas/authMemberIdSchema.json');
-const jwt = require('jsonwebtoken');
 
 
 router.post("/login", async function (req, res, next) {
@@ -23,7 +22,6 @@ router.post("/login", async function (req, res, next) {
     try {
         const { username, password } = req.body;
         const token = await UserUtils.loginUser(username, password);
-        console.log(jwt.decode(token));
         return res.status(200).json({ token });
     } catch (error) {
         return next(error);
