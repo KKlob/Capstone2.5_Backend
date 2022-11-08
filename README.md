@@ -31,7 +31,7 @@ Express.js REST API handling a PostgreSQL DB
 
 ![db_schema](./db_schema.png)
 
-- Addtional Data to be delivered upon request:
+- Addtional Data to be delivered upon any state members request or specific member request:
   - socials
     - twitter
     - facebook
@@ -43,5 +43,3 @@ Express.js REST API handling a PostgreSQL DB
   - votes_with_party_pct
   - years_served
   - photo
-
-This info will be added to the response json back to Client. Client will be saving the complete member object locally in the component/redux (TBD)
