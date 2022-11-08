@@ -17,7 +17,7 @@ class UserUtilities {
         try {
             const hashedPassword = await bcrypt.hash(password, 12);
             const newUser = await Users.create({ username, password: hashedPassword });
-            let payload = { id: newUser.id, username: newUser.username };
+            let payload = { id: newUser.id, username: newUser.username, subs: [] };
             let token = jwt.sign(payload, JWT_SECRET_KEY, { expiresIn: '1d' });
             return token;
         } catch (error) {
@@ -33,7 +33,8 @@ class UserUtilities {
 
             if (user) {
                 if (await bcrypt.compare(password, user.password) === true) {
-                    let payload = { id: user.id, username: user.username };
+                    let subs = await this.getSubs(user.id);
+                    let payload = { id: user.id, username: user.username, subs };
                     let token = jwt.sign(payload, JWT_SECRET_KEY, { expiresIn: '1d' });
                     return token;
                 }
