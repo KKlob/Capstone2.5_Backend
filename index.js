@@ -69,9 +69,9 @@ async function setupAdminUser() {
         await DB_Utils.createAdmin('admin', adminPassword);
         console.log("Admin account created");
 
-        console.log("Adding single subbed member to admin...");
-        await DB_Utils.createAdminSub('admin');
-        console.log("Admin sub created");
+        // console.log("Adding single subbed member to admin...");
+        // await DB_Utils.createAdminSub('admin');
+        // console.log("Admin sub created");
     } catch (error) {
         console.log("Error occurred while setting up adimn account");
         console.log(error.message);
