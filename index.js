@@ -31,7 +31,7 @@ async function syncDB() {
     // After initial run, remove the {force: true} from sequelize.sync(); No need to re-create tables every time server is run unless working on models
     // When pushing to production ensure this flag is removed. Don't want to overwrite the remote DB!
 
-    await sequelize.sync({ force: true });
+    await sequelize.sync();
     console.log("DB sync complete");
     console.log("*******");
 }
