@@ -28,6 +28,7 @@ class DB_Utilities {
     }
 
     async createAdmin(username, password) {
+        // create admin user - Used during server initialization only
         try {
             const hashedPassword = await bcrypt.hash(password, 12);
             await Users.create({ username, password: hashedPassword });
@@ -37,6 +38,7 @@ class DB_Utilities {
     }
 
     async createAdminSub(username) {
+        // create admin sub - Used during server initialization only
         try {
             const user = await Users.findOne({ where: { username } });
             const member = await Congress.findOne();

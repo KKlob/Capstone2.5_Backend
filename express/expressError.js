@@ -1,4 +1,5 @@
 class ExpressError extends Error {
+    // Generic error class for API
     constructor(message, status) {
         super();
         this.message = message;

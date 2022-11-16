@@ -5,6 +5,7 @@ const congressRoutes = require('./Routes/congressRoutes');
 const userRoutes = require('./Routes/userRoutes');
 const app = express();
 
+// main app construction for Express.js REST API
 
 app.use(express.json());
 app.use(cors());

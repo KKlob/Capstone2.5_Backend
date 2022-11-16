@@ -8,8 +8,10 @@ const noAuthSchema = require('./Schemas/noAuthSchema.json');
 const authSchema = require('./Schemas/authSchema.json');
 const authMemberSchema = require('./Schemas/authMemberIdSchema.json');
 
+// Collection of routes associated with users
 
 router.post("/login", async function (req, res, next) {
+    // Handles login of user. Returns JWT token w/ 24hr expiration
     const result = jsonschema.validate(req.body, noAuthSchema);
 
     if (!result.valid) {
@@ -52,6 +54,7 @@ router.post("/login", async function (req, res, next) {
 // });
 
 router.post("/signup", async function (req, res, next) {
+    // handles user signup. Returns JWT token for user with 24hr expiration
     const result = jsonschema.validate(req.body, noAuthSchema);
 
     if (!result.valid) {
@@ -71,6 +74,7 @@ router.post("/signup", async function (req, res, next) {
 });
 
 router.delete("/delete", ensureLoggedIn, async function (req, res, next) {
+    // handles user delete. Returns Confirmation of user deletion. Only allows a logged in user to delete themselves via JWT token.
     const result = jsonschema.validate(req.body, authSchema);
 
     if (!result.valid) {
@@ -93,6 +97,7 @@ router.delete("/delete", ensureLoggedIn, async function (req, res, next) {
 });
 
 router.post("/subs/add", ensureLoggedIn, async function (req, res, next) {
+    // handles adding a sub to a user account. returns success message
     const result = jsonschema.validate(req.body, authMemberSchema);
 
     if (!result.valid) {
@@ -114,6 +119,7 @@ router.post("/subs/add", ensureLoggedIn, async function (req, res, next) {
 });
 
 router.delete("/subs/remove", ensureLoggedIn, async function (req, res, next) {
+    // handles removing a sub from a user account. returns success message
     const result = jsonschema.validate(req.body, authMemberSchema);
 
     if (!result.valid) {
@@ -135,6 +141,7 @@ router.delete("/subs/remove", ensureLoggedIn, async function (req, res, next) {
 });
 
 router.get("/subs", ensureLoggedIn, async function (req, res, next) {
+    // handles getting all subs for a user. returns an array of members user is subbed to
     if (req.user) {
         const subs = await UserUtils.getSubs(req.user.id);
         return res.status(200).json({ subs });

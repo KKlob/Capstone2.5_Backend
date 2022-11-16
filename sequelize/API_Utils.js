@@ -122,6 +122,8 @@ class API_Utilities {
 
             console.log("Secondary member data cleaned");
 
+            // Returns the cleaned additional data for the member
+
             return addData;
         } catch (error) {
             throw new ExpressError(error.message, error.status);
